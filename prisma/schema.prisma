@@ -6,8 +6,8 @@ generator client {
 }
 
 datasource db {
-    provider = "mysql"
-    url      = env("DATABASE_URL")
+    provider     = "sqlite"
+    url          = env("DATABASE_URL")
     relationMode = "prisma"
 }
 
@@ -34,16 +34,19 @@ model User {
     username String @unique
     password String
     role     String
-    // Book     Book[]
+    Book     Book[]
 }
 
+
 model Book {
-    id           Int     @id @default(autoincrement())
-    isbn         String
-    name         String
-    author       String
-    price        Int
-    quantity     Int
-    // borrowedBy   User?   @relation(fields: [userUsername], references: [username])
-    // userUsername String?
+  id           Int      @id @default(autoincrement())
+  isbn         String
+  name         String
+  author       String
+  price        Int
+  quantity     Int
+  borrowedBy   User?    @relation(fields: [userUsername], references: [username])
+  userUsername String?
+
+  @@index([userUsername])
 }

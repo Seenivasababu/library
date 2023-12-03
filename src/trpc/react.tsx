@@ -14,6 +14,7 @@ export function TRPCReactProvider(props: {
   children: React.ReactNode;
   cookies: string;
 }) {
+  const role = localStorage.getItem("token")
   const [queryClient] = useState(() => new QueryClient());
 
   const [trpcClient] = useState(() =>
